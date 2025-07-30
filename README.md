@@ -1,1 +1,1 @@
-# earthbound-background
+# Earthbound Background Replicator
