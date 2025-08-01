@@ -34,18 +34,22 @@ def sine_wave(WIDTH, HEIGHT, frame, screen):
     for y in range(HEIGHT):
         # Frequency of the waves
         frequency = 0.05
-        amplitude = 400
+        amplitude = 20
         speed = 0.01
         wave = math.sin((y * frequency) + frame * speed)
         x_offset = int(wave * amplitude)
 
-        hue = ((y / HEIGHT) + (frame * 0.001)) % 1.0
+        hue = ((y / HEIGHT) + (frame * 0.9)) % 1.0
         # Using colorsys to convert HSV to RGB
-        rgb = colorsys.hsv_to_rgb(hue, 1.0, 1.0)
-        color = tuple(int(c * 255) for c in rgb)
+        rgb = colorsys.hsv_to_rgb(hue, 1, 1)
 
-        start_x = WIDTH // 2 - 150 + x_offset
-        end_x = WIDTH // 2 + 150 + x_offset
+        # Scale RGB values to 0-150 range for visibility
+        # Setting to *150 for low lighting
+        color = tuple(int(c * 150) for c in rgb)
+
+        # // 2 to get the middle of the screen
+        start_x = WIDTH // 2 
+        end_x = WIDTH // 2 + 1
         pygame.draw.line(screen, color, (start_x, y), (end_x, y), 2)
 
 if __name__ == "__main__":
